@@ -1,0 +1,21 @@
+{
+  "name": "heimrichhannot/contao-encore-contracts",
+  "type": "library",
+  "description": "A set of abstractions needed for encore bundle preparation.",
+  "license": "LGPL-3.0-or-later",
+  "homepage": "https://github.com/heimrichhannot/encore-contracts",
+  "authors": [
+    {
+      "name": "Heimrich & Hannot GmbH",
+      "email": "digitales@heimrich-hannot.de",
+      "homepage": "https://heimrich-hannot.de",
+      "role": "developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/heimrichhannot/encore-contracts/issues"
+  },
+  "require": {
+    "php": "^7.4||^8.0"
+  }
+}
