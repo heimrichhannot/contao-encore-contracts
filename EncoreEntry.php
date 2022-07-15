@@ -136,6 +136,4 @@ class EncoreEntry
         $this->addEntryToRemoveFromGlobals('TL_USER_CSS', $key);
         return $this;
     }
-
-
 }
