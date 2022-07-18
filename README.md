@@ -25,11 +25,11 @@ class EncoreExtension implements EncoreExtensionInterface
         return [
             EncoreEntry::create('main-theme', 'assets/main/js/main-theme.js')
                 ->setRequiresCss(true)
-                ->setHead(false),
+                ->setIsHeadScript(false),
             EncoreEntry::create('one-pager', 'assets/one-pager/js/one-pager.js')
                 ->setRequiresCss(true),
             EncoreEntry::create('custom-head-js', 'assets/main/js/head.js')
-                ->setHead(true)
+                ->setIsHeadScript(true)
                 // Define entries that will be removed from the global asset array
                 ->addJsEntryToRemoveFromGlobals('colorbox')
                 ->addCssEntryToRemoveFromGlobals('css-to-replace'),

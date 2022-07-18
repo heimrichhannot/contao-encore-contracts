@@ -7,9 +7,9 @@ class EncoreEntry
     const GLOBAL_KEYS = ['TL_JAVASCRIPT', 'TL_JQUERY', 'TL_USER_CSS', 'TL_CSS'];
     private string $name;
     private string $path;
-    private bool   $requiresCss       = false;
-    private bool   $head              = false;
-    private array  $replaceGlobelKeys = [];
+    private bool  $requiresCss       = false;
+    private bool  $isHeadScript      = false;
+    private array $replaceGlobelKeys = [];
 
     /**
      * @param string $name
@@ -65,7 +65,7 @@ class EncoreEntry
     /**
      * @return bool
      */
-    public function isRequiresCss(): bool
+    public function getRequiresCss(): bool
     {
         return $this->requiresCss;
     }
@@ -83,22 +83,22 @@ class EncoreEntry
     /**
      * @return bool
      */
-    public function isHead(): bool
+    public function getIsHeadScript(): bool
     {
-        return $this->head;
+        return $this->isHeadScript;
     }
 
     /**
      * @param bool $head
      * @return EncoreEntry
      */
-    public function setHead(bool $head): EncoreEntry
+    public function setIsHeadScript(bool $head): EncoreEntry
     {
-        $this->head = $head;
+        $this->isHeadScript = $head;
         return $this;
     }
 
-    public function addEntryToRemoveFromGlobals(string $globalKey, array $entryName): EncoreEntry
+    public function addEntryToRemoveFromGlobals(string $globalKey, string $entryName): EncoreEntry
     {
         if (!in_array($globalKey, self::GLOBAL_KEYS)) {
             trigger_error(
