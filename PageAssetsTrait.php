@@ -10,9 +10,29 @@ trait PageAssetsTrait
     /** @var ContainerInterface */
     protected $container;
 
+    /**
+     * Add a page entrypoint
+     * This method checks, if encore bundle is installed and add the entrypoint for current page, if it is.
+     * Otherwise,it registers the fallback assets to the contao global asset array.
+     *
+     * Fallback asset example:
+     * [
+     *      'TL_CSS' => ['main-theme' => 'assets/main/dist/main-theme.min.css|static'],
+     *      'TL_JAVASCRIPT' => [
+     *          'main-theme' => 'assets/main/dist/main-theme.min.js|static',
+     *          'some-dependency' => 'assets/some-dependency/some-dependency.min.js|static',
+     *      ],
+     * ]
+     *
+     * @param string $name
+     * @param array $fallbackAssets An array of global key name (e.g. TL_CSS, TL_JAVASCRIPT,...), entry key and entry path.
+     * @return void
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
     protected function addPageEntrypoint(string $name, array $fallbackAssets = []): void
     {
-        if (class_exists(FrontendAsset::class) && $this->container->has(FrontendAsset::class)) {
+        if (class_exists(FrontendAsset::class) && $this->container && $this->container->has(FrontendAsset::class)) {
             $this->container->get(FrontendAsset::class)->addActiveEntrypoint($name);
             return;
         }
@@ -42,6 +62,11 @@ trait PageAssetsTrait
     public static function getSubscribedServices()
     {
         $services = [];
+
+        if (method_exists(get_parent_class(self::class) ?: '', __FUNCTION__)) {
+            $services = parent::getSubscribedServices();
+        }
+        
         if (class_exists(FrontendAsset::class)) {
             $services[] = '?'.FrontendAsset::class;
         }
