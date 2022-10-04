@@ -3,7 +3,7 @@
   "type": "library",
   "description": "A set of abstractions needed for encore bundle preparation.",
   "license": "LGPL-3.0-or-later",
-  "homepage": "https://github.com/heimrichhannot/encore-contracts",
+  "homepage": "https://github.com/heimrichhannot/contao-encore-contracts",
   "authors": [
     {
       "name": "Heimrich & Hannot GmbH",
@@ -13,7 +13,7 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/heimrichhannot/encore-contracts/issues"
+    "issues": "https://github.com/heimrichhannot/contao-encore-contracts/issues"
   },
   "require": {
     "php": "^7.4 || ^8.0"

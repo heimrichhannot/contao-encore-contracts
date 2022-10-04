@@ -1,10 +1,12 @@
 # Contao Encore Contracts
 
-A set of abstractions needed for [encore bundle](https://github.com/heimrichhannot/contao-encore-bundle) preparation.
+This package contains abstractions to add loose [Encore bundle](https://github.com/heimrichhannot/contao-encore-bundle) support.
 
 ## Usage
 
 ### Register entrypoints
+
+To register encore entrypoints create an EncoreExtension class implementing `EncoreExtensionInterface`.
 
 ```php
 namespace HeimrichHannot\ExampleBundle\Asset;
@@ -42,7 +44,11 @@ class EncoreExtension implements EncoreExtensionInterface
 
 ### Add entrypoints for current page
 
-Make your class implement `ServiceSubscriberInterface` and use `PageAssetsTrait`.
+To add entrypoints (must be registered beforehand) from your code, you can use the `PageAssetsTrait`. 
+It checks if encore bundle is installed and add the entry, if this is the case. 
+Otherwise, it adds the fallback assets to the contao global asset array.
+
+Make your class implement `ServiceSubscriberInterface` and use `PageAssetsTrait` (it already implements the needed methods for the ServiceSubscriberInterface).
 Afterwards just call `$this->addPageEntrypoint(string $name, array $fallbackAssets = [])`.
 
 ```php
@@ -58,8 +64,7 @@ class FrontendController implements ServiceSubscriberInterface
         $this->addPageEntrypoint(
             // Encore entry point name
             'contao-example-bundle', 
-             // Optional: define fallback assets if encore bundle is not installed
-             // They are registered to global contao asset array, so you don't need to do it somewhere else
+             // Optional: define fallback assets to use if encore bundle is not installed
             [
                 'TL_CSS' => ['main-theme' => 'assets/main/dist/main-theme.min.css|static'],
                 'TL_JAVASCRIPT' => [
