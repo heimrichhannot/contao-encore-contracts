@@ -7,10 +7,10 @@ interface EncoreExtensionInterface
     /**
      * @return string|class-string<\Symfony\Component\HttpKernel\Bundle\Bundle> The bundle class
      */
-    public static function getBundle(): string;
+    public function getBundle(): string;
 
     /**
      * @return array|EncoreEntry[]
      */
-    public static function getEntries(): array;
+    public function getEntries(): array;
 }

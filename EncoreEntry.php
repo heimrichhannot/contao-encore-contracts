@@ -133,7 +133,14 @@ class EncoreEntry
     public function addCssEntryToRemoveFromGlobals(string $key): EncoreEntry
     {
         $this->addEntryToRemoveFromGlobals('TL_CSS', $key);
-        $this->addEntryToRemoveFromGlobals('TL_USER_CSS', $key);
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getReplaceGlobelKeys(): array
+    {
+        return $this->replaceGlobelKeys;
     }
 }
