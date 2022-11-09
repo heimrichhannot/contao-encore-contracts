@@ -59,7 +59,7 @@ trait PageAssetsTrait
         }
     }
 
-    public static function getSubscribedServices()
+    public static function getSubscribedServices(): array
     {
         $services = [];
 
