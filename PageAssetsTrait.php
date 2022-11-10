@@ -81,12 +81,13 @@ trait PageAssetsTrait
      */
     public function setContainer(ContainerInterface $container): ?ContainerInterface
     {
-        $this->container = $container;
-
         if (method_exists(get_parent_class(self::class) ?: '', __FUNCTION__)) {
             return parent::setContainer($container);
         }
 
-        return null;
+        $previous = $this->container ?? null;
+        $this->container = $container;
+
+        return $previous;
     }
 }
