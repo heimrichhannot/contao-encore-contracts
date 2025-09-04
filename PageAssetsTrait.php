@@ -10,7 +10,7 @@ use Symfony\Contracts\Service\ServiceSubscriberTrait;
 trait PageAssetsTrait
 {
     use ServiceSubscriberTrait {
-        ServiceSubscriberTrait::getSubscribedServices as private parentGetSubscribedServices;
+        ServiceSubscriberTrait::getSubscribedServices as private _ServiceSubscriberTrait_GetSubscribedServices;
     }
 
     /**
@@ -48,14 +48,18 @@ trait PageAssetsTrait
 
         foreach ($fallbackAssets as $globalKey => $assets)
         {
-            if (!in_array($globalKey, EncoreEntry::GLOBAL_KEYS)) {
+            if (!\in_array($globalKey, EncoreEntry::GLOBAL_KEYS, true)) {
                 trigger_error("Invalid global key for encore entry fallback asset in ".__CLASS__, E_USER_WARNING);
                 continue;
             }
 
-            if (!is_array($assets)) {
+            if (!\is_array($assets)) {
                 trigger_error("Invalid fallback entry in ".__CLASS__, E_USER_WARNING.". Entry must be an array.");
                 continue;
+            }
+
+            if (!isset($GLOBALS[$globalKey])) {
+                $GLOBALS[$globalKey] = [];
             }
 
             foreach ($assets as $key => $path) {
@@ -73,7 +77,7 @@ trait PageAssetsTrait
 
     public static function getSubscribedServices(): array
     {
-        $services = self::parentGetSubscribedServices();
+        $services = self::_ServiceSubscriberTrait_GetSubscribedServices();
 
         if (class_exists(FrontendAsset::class)) {
             $services[] = '?'.FrontendAsset::class;
