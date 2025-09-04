@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-09-04
+- Refactored: PageAssetTrait
+
 ## [1.0.2] - 2022-11-10
 - Fixed: compatibility issues of PageAssetTrait with ServiceSubscriber::getContainer()
 
