@@ -4,6 +4,7 @@ namespace HeimrichHannot\EncoreContracts;
 
 use HeimrichHannot\EncoreBundle\Asset\FrontendAsset;
 use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Contracts\Service\ServiceSubscriberTrait;
 
@@ -11,6 +12,7 @@ trait PageAssetsTrait
 {
     use ServiceSubscriberTrait {
         ServiceSubscriberTrait::getSubscribedServices as private _ServiceSubscriberTrait_getSubscribedServices;
+        ServiceSubscriberTrait::setContainer as private _ServiceSubscriberTrait_setContainer;
     }
 
     /**
@@ -92,5 +94,17 @@ trait PageAssetsTrait
         }
 
         return $services;
+    }
+
+    public function setContainer(ContainerInterface $container): ?ContainerInterface
+    {
+        $ret = $this->_ServiceSubscriberTrait_setContainer($container);
+
+        if ($ret instanceof ContainerInterface)
+        {
+            return $ret;
+        }
+
+        return $this->container = null;
     }
 }
