@@ -11,6 +11,7 @@ trait PageAssetsTrait
 {
     use ServiceSubscriberTrait {
         ServiceSubscriberTrait::getSubscribedServices as private _ServiceSubscriberTrait_GetSubscribedServices;
+        ServiceSubscriberTrait::getSubscribedServices as private _ServiceSubscriberTrait_getSubscribedServices;
     }
 
     /**
@@ -77,7 +78,7 @@ trait PageAssetsTrait
 
     public static function getSubscribedServices(): array
     {
-        $services = self::_ServiceSubscriberTrait_GetSubscribedServices();
+        $services = self::_ServiceSubscriberTrait_getSubscribedServices();
 
         if (class_exists(FrontendAsset::class)) {
             $services[] = '?'.FrontendAsset::class;
