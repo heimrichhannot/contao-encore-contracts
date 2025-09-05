@@ -58,18 +58,26 @@ trait PageAssetsTrait
                 continue;
             }
 
-            if (!isset($GLOBALS[$globalKey])) {
+            if (!isset($GLOBALS[$globalKey]) || !\is_array($GLOBALS[$globalKey]))
+            {
                 $GLOBALS[$globalKey] = [];
             }
 
-            foreach ($assets as $key => $path) {
+            $glob = &$GLOBALS[$globalKey];
+
+            foreach ($assets as $key => $path)
+            {
                 if (!is_string($path)) {
                     trigger_error("Invalid fallback entry in ".__CLASS__.". Path must be a string.", E_USER_WARNING);
                 }
-                if (is_string($key) && !is_numeric($key)) {
-                    $GLOBALS[$globalKey][$key] = $path;
-                } else {
-                    $GLOBALS[$globalKey][] = $path;
+
+                if (is_string($key) && !is_numeric($key))
+                {
+                    $glob[$key] = $path;
+                }
+                else
+                {
+                    $glob[] = $path;
                 }
             }
         }
