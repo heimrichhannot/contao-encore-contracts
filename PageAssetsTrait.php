@@ -11,8 +11,8 @@ use Symfony\Contracts\Service\ServiceSubscriberTrait;
 trait PageAssetsTrait
 {
     use ServiceSubscriberTrait {
-        ServiceSubscriberTrait::getSubscribedServices as private _ServiceSubscriberTrait_getSubscribedServices;
-        ServiceSubscriberTrait::setContainer as private _ServiceSubscriberTrait_setContainer;
+        ServiceSubscriberTrait::getSubscribedServices as public _ServiceSubscriberTrait_getSubscribedServices;
+        ServiceSubscriberTrait::setContainer as public _ServiceSubscriberTrait_setContainer;
     }
 
     /**
