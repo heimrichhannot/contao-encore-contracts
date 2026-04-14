@@ -36,11 +36,9 @@ trait PageAssetsTrait
             $ret = parent::setContainer($container);
         }
 
-        if ($ret instanceof ContainerInterface) {
-            return $ret;
-        }
+        $this->container = $container;
 
-        return $this->container = null;
+        return $ret;
     }
 
     /**
