@@ -17,7 +17,7 @@
   },
   "require": {
     "php": "^8.0",
-    "symfony/service-contracts": ">=3.0 <3.5"
+    "symfony/service-contracts": "^3.5"
   },
   "autoload": {
     "psr-4": { "HeimrichHannot\\EncoreContracts\\": "" }
