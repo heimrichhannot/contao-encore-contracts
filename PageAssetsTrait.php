@@ -85,7 +85,9 @@ trait PageAssetsTrait
 
     public static function getSubscribedServices(): array
     {
-        $services = self::_ServiceSubscriberTrait_getSubscribedServices();
+        $services = \method_exists(\get_parent_class(self::class) ?: '', __FUNCTION__)
+            ? parent::getSubscribedServices()
+            : [];
 
         if (\class_exists(FrontendAsset::class)) {
             $services[] = '?'.FrontendAsset::class;
