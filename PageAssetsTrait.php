@@ -14,9 +14,10 @@ trait PageAssetsTrait
     }
 
     /**
-     * Add a page entrypoint
-     * This method checks, if encore bundle is installed and add the entrypoint for current page, if it is.
-     * Otherwise,it registers the fallback assets to the contao global asset array.
+     * Add a page entrypoint.
+     *
+     * If the encore bundle is installed, add the entrypoint to the current page.
+     * Otherwise, registers the fallback assets to the contao global asset array.
      *
      * Fallback asset example:
      * [
@@ -30,12 +31,13 @@ trait PageAssetsTrait
      * @param string $name
      * @param array<string, array<string|int, string>> $fallbackAssets An array of global key name
      *              (e.g., TL_CSS, TL_JAVASCRIPT, ...), entry key and entry path.
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface|NotFoundExceptionInterface
      */
     protected function addPageEntrypoint(string $name, array $fallbackAssets = []): void
     {
-        if (class_exists(FrontendAsset::class) && $this->container && $this->container->has(FrontendAsset::class))
+        if (\class_exists(FrontendAsset::class)
+            && isset($this->container)
+            && $this->container->has(FrontendAsset::class))
         {
             $this->container->get(FrontendAsset::class)->addActiveEntrypoint($name);
             return;
@@ -58,8 +60,7 @@ trait PageAssetsTrait
                 continue;
             }
 
-            if (!isset($GLOBALS[$globalKey]) || !\is_array($GLOBALS[$globalKey]))
-            {
+            if (!isset($GLOBALS[$globalKey]) || !\is_array($GLOBALS[$globalKey])) {
                 $GLOBALS[$globalKey] = [];
             }
 
@@ -67,18 +68,17 @@ trait PageAssetsTrait
 
             foreach ($assets as $key => $path)
             {
-                if (!is_string($path)) {
+                if (!\is_string($path)) {
                     trigger_error("Invalid fallback entry in ".__CLASS__.". Path must be a string.", E_USER_WARNING);
                 }
 
-                if (is_string($key) && !is_numeric($key))
+                if (\is_string($key) && !\is_numeric($key))
                 {
                     $glob[$key] = $path;
+                    return;
                 }
-                else
-                {
-                    $glob[] = $path;
-                }
+
+                $glob[] = $path;
             }
         }
     }
