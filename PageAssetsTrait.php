@@ -4,14 +4,14 @@ namespace HeimrichHannot\EncoreContracts;
 
 use HeimrichHannot\EncoreBundle\Asset\FrontendAsset;
 use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Symfony\Contracts\Service\ServiceSubscriberTrait;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait PageAssetsTrait
 {
-    use ServiceSubscriberTrait {
-        ServiceSubscriberTrait::getSubscribedServices as private _ServiceSubscriberTrait_getSubscribedServices;
-    }
+    /** @var ContainerInterface $container */
+    protected $container;
 
     /**
      * Add a page entrypoint.
@@ -92,5 +92,20 @@ trait PageAssetsTrait
         }
 
         return $services;
+    }
+
+    #[Required]
+    public function setContainer(ContainerInterface $container): ?ContainerInterface
+    {
+        $ret = null;
+        if (\method_exists(\get_parent_class(self::class) ?: '', __FUNCTION__)) {
+            $ret = parent::setContainer($container);
+        }
+
+        if ($ret instanceof ContainerInterface) {
+            return $ret;
+        }
+
+        return $this->container = null;
     }
 }
