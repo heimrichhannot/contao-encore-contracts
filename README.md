@@ -76,3 +76,32 @@ class FrontendController implements ServiceSubscriberInterface
     }
 }
 ```
+
+If implementing the `ServiceSubscriberInterface` is not possible, you can use the `AddPageEntrypointTrait`, which
+also provides the `addPageEntrypoint` method, but requires you to implement the `getFrontendAsset` method, which should
+return the `FrontendAsset` service object.
+
+```php
+use HeimrichHannot\EncoreBundle\Asset\FrontendAsset;
+use HeimrichHannot\EncoreContracts\AddPageEntrypointTrait;
+
+class MyService
+{
+    use AddPageEntrypointTrait;
+    
+    public function __construct(private readonly FrontendAsset $frontendAsset) {}
+    
+    protected function getFrontendAsset(): FrontendAsset
+    {
+        return $this->frontendAsset;
+    }
+    
+    public function myAction()
+    {
+        $this->addPageEntrypoint(
+            // Encore entry point name
+            'contao-example-bundle'
+        );
+    }
+}
+```
