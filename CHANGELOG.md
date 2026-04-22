@@ -1,7 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [prepared 1.2.0] - 2026-04-14
+## [1.3.0] - 2026-04-22
+- Changed: do not rely on Symfony service contracts for PageAssetTrait as the versions differ to much
+
+## [1.2.0] - 2026-04-14
 - Fixed: compatibility issues (re-implement updates from 1.1.0)
 - Added: `AddPageEntypointTrait` for custom service discovery capability
 
