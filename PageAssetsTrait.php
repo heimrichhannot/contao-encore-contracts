@@ -10,7 +10,7 @@ trait PageAssetsTrait
 {
     use AddPageEntrypointTrait;
 
-    protected function getFrontendAsset(): FrontendAsset|null
+    protected function getFrontendAsset(): mixed
     {
         if (!\class_exists(FrontendAsset::class)) {
             return null;
