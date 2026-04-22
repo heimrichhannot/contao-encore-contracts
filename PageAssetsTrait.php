@@ -27,4 +27,20 @@ trait PageAssetsTrait
 
         return null;
     }
+
+    /**
+     * Implement the ServiceSubscriberInterface method to not break existing usages.
+     */
+    public static function getSubscribedServices(): array
+    {
+        $services = \method_exists(\get_parent_class(self::class) ?: '', __FUNCTION__)
+            ? parent::getSubscribedServices()
+            : [];
+
+        if (\class_exists(FrontendAsset::class)) {
+            $services[] = '?'.FrontendAsset::class;
+        }
+
+        return $services;
+    }
 }
