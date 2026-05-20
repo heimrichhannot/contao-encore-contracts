@@ -75,7 +75,7 @@ trait AddPageEntrypointTrait
                 if (\is_string($key) && !\is_numeric($key))
                 {
                     $glob[$key] = $path;
-                    return;
+                    continue;
                 }
 
                 $glob[] = $path;

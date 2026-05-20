@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2026-05-20
+- Fixed: fallback assets not added correctly if more then one is added
+
 ## [1.3.0] - 2026-04-22
 - Changed: do not rely on Symfony service contracts for PageAssetTrait as the versions differ to much
 
