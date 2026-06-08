@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2026-06-08
+- Changed: make defer nullable to not override default global configurations
+
 ## [1.4.0] - 2026-06-08
 - Added: EncoreEntry::setDefer() method to allow deferring script loading
 

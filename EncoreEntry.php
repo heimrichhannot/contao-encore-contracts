@@ -10,7 +10,7 @@ class EncoreEntry
     private bool  $requiresCss       = false;
     private bool  $isHeadScript      = false;
     private array $replaceGlobelKeys = [];
-    public bool $defer = false;
+    public ?bool $defer = null;
 
     /**
      * @param string $name
@@ -142,7 +142,7 @@ class EncoreEntry
         return $this->replaceGlobelKeys;
     }
 
-    public function setDefer(bool $defer): EncoreEntry
+    public function setDefer(?bool $defer): EncoreEntry
     {
         $this->defer = $defer;
         return $this;
