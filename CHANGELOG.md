@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2026-06-08
+- Added: EncoreEntry::setDefer() method to allow deferring script loading
+
 ## [1.3.1] - 2026-05-20
 - Fixed: fallback assets not added correctly if more then one is added
 

@@ -37,6 +37,7 @@ class EncoreExtension implements EncoreExtensionInterface
                 // Define entries that will be removed from the global asset array
                 ->addJsEntryToRemoveFromGlobals('colorbox')
                 ->addCssEntryToRemoveFromGlobals('css-to-replace'),
+                ->setDefer(true)
         ];
     }
 }
