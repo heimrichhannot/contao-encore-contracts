@@ -2,10 +2,12 @@
 
 namespace HeimrichHannot\EncoreContracts;
 
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
 interface EncoreExtensionInterface
 {
     /**
-     * @return string|class-string<\Symfony\Component\HttpKernel\Bundle\Bundle> The bundle class
+     * @return string|class-string<Bundle> The bundle class
      */
     public function getBundle(): string;
 

@@ -21,5 +21,13 @@
   },
   "autoload": {
     "psr-4": { "HeimrichHannot\\EncoreContracts\\": "" }
+  },
+  "require-dev": {
+    "rector/rector": "^2.4",
+    "contao/contao-rector": "dev-main",
+    "symplify/easy-coding-standard": "^13.1",
+    "phpstan/phpstan": "^2.2",
+    "phpstan/phpstan-symfony": "^2.0",
+    "contao/manager-plugin": "^2.13"
   }
 }

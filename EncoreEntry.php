@@ -6,22 +6,23 @@ class EncoreEntry
 {
     public const GLOBAL_KEYS = ['TL_JAVASCRIPT', 'TL_JQUERY', 'TL_USER_CSS', 'TL_CSS'];
 
-    public bool  $requiresCss       = false;
-    public bool  $isHeadScript      = false;
+    public bool $requiresCss = false;
+    public bool $isHeadScript = false;
     private array $replaceGlobelKeys = [];
     public ?bool $defer = null;
 
-    public function __construct(public string $name, public string $path)
-    {
+    public function __construct(
+        public string $name,
+        public string $path,
+    ) {
     }
 
     public static function create(string $name, string $path): EncoreEntry
     {
-        return (new self($name, $path));
+        return new self($name, $path);
     }
 
     /**
-     * @return string
      * @deprecated Use property instead
      */
     public function getName(): string
@@ -29,13 +30,10 @@ class EncoreEntry
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return EncoreEntry
-     */
     public function setName(string $name): EncoreEntry
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -47,13 +45,10 @@ class EncoreEntry
         return $this->path;
     }
 
-    /**
-     * @param string $path
-     * @return EncoreEntry
-     */
     public function setPath(string $path): EncoreEntry
     {
         $this->path = $path;
+
         return $this;
     }
 
@@ -65,13 +60,10 @@ class EncoreEntry
         return $this->requiresCss;
     }
 
-    /**
-     * @param bool $requiresCss
-     * @return EncoreEntry
-     */
     public function setRequiresCss(bool $requiresCss): EncoreEntry
     {
         $this->requiresCss = $requiresCss;
+
         return $this;
     }
 
@@ -83,13 +75,10 @@ class EncoreEntry
         return $this->isHeadScript;
     }
 
-    /**
-     * @param bool $head
-     * @return EncoreEntry
-     */
     public function setIsHeadScript(bool $head): EncoreEntry
     {
         $this->isHeadScript = $head;
+
         return $this;
     }
 
@@ -97,7 +86,7 @@ class EncoreEntry
     {
         if (!in_array($globalKey, self::GLOBAL_KEYS)) {
             trigger_error(
-                "Possible invalid global keys $globalKey used. Supported keys are " . implode(", ", self::GLOBAL_KEYS) . ".",
+                "Possible invalid global keys $globalKey used. Supported keys are ".implode(', ', self::GLOBAL_KEYS).'.',
                 E_USER_WARNING
             );
         }
@@ -116,18 +105,21 @@ class EncoreEntry
     public function addJsEntryToRemoveFromGlobals(string $key): EncoreEntry
     {
         $this->addEntryToRemoveFromGlobals('TL_JAVASCRIPT', $key);
+
         return $this;
     }
 
     public function addJqueryEntryToRemoveFromGlobals(string $key): EncoreEntry
     {
         $this->addEntryToRemoveFromGlobals('TL_JQUERY', $key);
+
         return $this;
     }
 
     public function addCssEntryToRemoveFromGlobals(string $key): EncoreEntry
     {
         $this->addEntryToRemoveFromGlobals('TL_CSS', $key);
+
         return $this;
     }
 
@@ -139,6 +131,7 @@ class EncoreEntry
     public function setDefer(?bool $defer): EncoreEntry
     {
         $this->defer = $defer;
+
         return $this;
     }
 

@@ -28,35 +28,33 @@ trait AddPageEntrypointTrait
      *      ],
      * ]
      *
-     * @param string $name
      * @param array<string, array<string|int, string>> $fallbackAssets An array of global key name
-     *              (e.g., TL_CSS, TL_JAVASCRIPT, ...), entry key and entry path.
+     *                                                                 (e.g., TL_CSS, TL_JAVASCRIPT, ...), entry key and entry path.
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
     protected function addPageEntrypoint(string $name, array $fallbackAssets = []): void
     {
         $frontendAsset = $this->getFrontendAsset();
-        if ($frontendAsset instanceof FrontendAsset)
-        {
+        if ($frontendAsset instanceof FrontendAsset) {
             $frontendAsset->addActiveEntrypoint($name);
+
             return;
         }
 
-        if (empty($fallbackAssets))
-        {
+        if (empty($fallbackAssets)) {
             return;
         }
 
-        foreach ($fallbackAssets as $globalKey => $assets)
-        {
+        foreach ($fallbackAssets as $globalKey => $assets) {
             if (!\in_array($globalKey, EncoreEntry::GLOBAL_KEYS, true)) {
-                \trigger_error("Invalid global key for encore entry fallback asset in ".__CLASS__, E_USER_WARNING);
+                \trigger_error('Invalid global key for encore entry fallback asset in '.self::class, E_USER_WARNING);
                 continue;
             }
 
             if (!\is_array($assets)) {
-                \trigger_error("Invalid fallback entry in " . __CLASS__ . ". Entry must be an array.", E_USER_WARNING);
+                \trigger_error('Invalid fallback entry in '.self::class.'. Entry must be an array.', E_USER_WARNING);
                 continue;
             }
 
@@ -66,14 +64,12 @@ trait AddPageEntrypointTrait
 
             $glob = &$GLOBALS[$globalKey];
 
-            foreach ($assets as $key => $path)
-            {
+            foreach ($assets as $key => $path) {
                 if (!\is_string($path)) {
-                    trigger_error("Invalid fallback entry in ".__CLASS__.". Path must be a string.", E_USER_WARNING);
+                    trigger_error('Invalid fallback entry in '.self::class.'. Path must be a string.', E_USER_WARNING);
                 }
 
-                if (\is_string($key) && !\is_numeric($key))
-                {
+                if (\is_string($key) && !\is_numeric($key)) {
                     $glob[$key] = $path;
                     continue;
                 }

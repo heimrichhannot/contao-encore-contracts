@@ -22,7 +22,6 @@ trait PageAssetsTrait
 
         if (class_exists(System::class) && System::getContainer()->has(FrontendAsset::class)) {
             return System::getContainer()->get(FrontendAsset::class);
-
         }
 
         return null;

@@ -1,0 +1,14 @@
+parameters:
+  level: 1
+  paths:
+  - .
+  excludePaths:
+  - vendor
+  - ecs.php
+#    - contao
+#  universalObjectCratesClasses:
+#    - Contao\Database\Result
+#    - Contao\Model
+#    - Contao\Template
+includes:
+  - vendor/phpstan/phpstan-symfony/extension.neon
