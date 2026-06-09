@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2026-06-09
+- Added: EncoreEntry::toArray()
+- Changed: most EncoreEntry properties now public
+- Deprecated: most EncoreEntry getter methods, use public properties instead
+
 ## [1.4.1] - 2026-06-08
 - Changed: make defer nullable to not override default global configurations
 

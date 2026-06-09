@@ -4,22 +4,15 @@ namespace HeimrichHannot\EncoreContracts;
 
 class EncoreEntry
 {
-    const GLOBAL_KEYS = ['TL_JAVASCRIPT', 'TL_JQUERY', 'TL_USER_CSS', 'TL_CSS'];
-    private string $name;
-    private string $path;
-    private bool  $requiresCss       = false;
-    private bool  $isHeadScript      = false;
+    public const GLOBAL_KEYS = ['TL_JAVASCRIPT', 'TL_JQUERY', 'TL_USER_CSS', 'TL_CSS'];
+
+    public bool  $requiresCss       = false;
+    public bool  $isHeadScript      = false;
     private array $replaceGlobelKeys = [];
     public ?bool $defer = null;
 
-    /**
-     * @param string $name
-     * @param string $path
-     */
-    public function __construct(string $name, string $path)
+    public function __construct(public string $name, public string $path)
     {
-        $this->name = $name;
-        $this->path = $path;
     }
 
     public static function create(string $name, string $path): EncoreEntry
@@ -29,6 +22,7 @@ class EncoreEntry
 
     /**
      * @return string
+     * @deprecated Use property instead
      */
     public function getName(): string
     {
@@ -46,7 +40,7 @@ class EncoreEntry
     }
 
     /**
-     * @return string
+     * @deprecated Use property instead
      */
     public function getPath(): string
     {
@@ -64,7 +58,7 @@ class EncoreEntry
     }
 
     /**
-     * @return bool
+     * @deprecated Use property instead
      */
     public function getRequiresCss(): bool
     {
@@ -82,7 +76,7 @@ class EncoreEntry
     }
 
     /**
-     * @return bool
+     * @deprecated Use property instead
      */
     public function getIsHeadScript(): bool
     {
@@ -146,5 +140,16 @@ class EncoreEntry
     {
         $this->defer = $defer;
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'file' => $this->path,
+            'requires_css' => $this->requiresCss,
+            'head' => $this->isHeadScript,
+            'defer' => $this->defer,
+        ];
     }
 }
